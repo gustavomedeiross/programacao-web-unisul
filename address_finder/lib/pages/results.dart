@@ -1,3 +1,4 @@
+import 'package:address_finder/helpers/address_helper.dart';
 import 'package:address_finder/models/address.dart';
 import 'package:address_finder/repositories/address_repository.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,53 @@ class Results extends StatelessWidget {
 
   Results({@required this.cep});
 
+  Text _text(String text) {
+    return Text(
+      text,
+    );
+  }
+
+  TableRow _tableRow(String key, String value, {bool isTableHeader = false}) {
+    return TableRow(
+      decoration: BoxDecoration(
+        color: isTableHeader
+            ? Color(0xFF666666).withOpacity(0.2)
+            : Color(0xFF666666).withOpacity(0.4),
+      ),
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.all(15),
+          child: _text(key),
+        ),
+        Padding(
+          padding: EdgeInsets.all(15),
+          child: _text(value.length > 0 ? value : 'N/A'),
+        ),
+      ],
+    );
+  }
+
+  Widget _table(BuildContext context, Address address) {
+    Map<String, dynamic> addressMap = address.toMap();
+
+    List<TableRow> addressTableRows = addressMap.entries.map((e) {
+      return _tableRow(AddressHelper.getLabels(e.key), e.value);
+    }).toList();
+
+    return Table(
+      children: <TableRow>[
+        _tableRow('Campo', 'Valor', isTableHeader: true),
+        ...addressTableRows
+      ],
+      border: TableBorder(
+          horizontalInside: BorderSide(
+              color: Theme.of(context).scaffoldBackgroundColor, width: 2.5)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('oi')),
       body: Center(
         child: FutureBuilder(
             future: _addressRepository.getAddressByCep(cep),
@@ -30,9 +74,13 @@ class Results extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('A imagem vai aqui (talvez lottie)'),
-                  Text('CEP: ${snapshot.data.cep}'),
-                  Text('Cidade: ${snapshot.data.city}')
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: _table(context, snapshot.data),
+                  )
+                  // Text('A imagem vai aqui (talvez lottie)'),
+                  // Text('CEP: ${snapshot.data.cep}'),
+                  // Text('Cidade: ${snapshot.data.city}')
                 ],
               );
             }),

@@ -33,4 +33,18 @@ class Address {
       gia: json['gia'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'cep': this.cep,
+      'street': this.street,
+      'complement': this.complement,
+      'neighborhood': this.neighborhood,
+      'city': this.city,
+      'state': this.state,
+      'ibge': this.ibge,
+      'unity': this.unity,
+      'gia': this.gia,
+    };
+  }
 }
