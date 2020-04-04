@@ -107,7 +107,6 @@ class _HomeState extends State<Home> {
                   color: Theme.of(context).primaryColor,
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      print('hello');
                       num bmiResult = _calculateBmi(
                           _heightController.numberValue,
                           _weightController.numberValue);

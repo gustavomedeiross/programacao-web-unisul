@@ -17,7 +17,8 @@ class Results extends StatelessWidget {
     );
   }
 
-  TableRow _tableRow(String key, String value, {bool isTableHeader = false}) {
+  TableRow _tableRow(String key, String value, BuildContext context,
+      {bool isTableHeader = false}) {
     return TableRow(
       decoration: BoxDecoration(
         color: isTableHeader
@@ -41,12 +42,12 @@ class Results extends StatelessWidget {
     Map<String, dynamic> addressMap = address.toMap();
 
     List<TableRow> addressTableRows = addressMap.entries.map((e) {
-      return _tableRow(AddressHelper.getLabels(e.key), e.value);
+      return _tableRow(AddressHelper.getLabels(e.key), e.value, context);
     }).toList();
 
     return Table(
       children: <TableRow>[
-        _tableRow('Campo', 'Valor', isTableHeader: true),
+        _tableRow('Campo', 'Valor', context, isTableHeader: true),
         ...addressTableRows
       ],
       border: TableBorder(
@@ -58,31 +59,58 @@ class Results extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Infomações do Endereço'),
+      ),
       body: Center(
         child: FutureBuilder(
             future: _addressRepository.getAddressByCep(cep),
             builder: (_, snapshot) {
-              if (snapshot.hasError) {
-                return Text('erro');
-              }
-
-              if (!snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return Lottie.network(
                     'https://assets2.lottiefiles.com/datafiles/wW9k6ALg5Mn9cIj/data.json');
               }
 
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    child: _table(context, snapshot.data),
-                  )
-                  // Text('A imagem vai aqui (talvez lottie)'),
-                  // Text('CEP: ${snapshot.data.cep}'),
-                  // Text('Cidade: ${snapshot.data.city}')
-                ],
-              );
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width * .4,
+                        child: Lottie.network(
+                          'https://assets6.lottiefiles.com/packages/lf20_4azG0q.json',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * .8,
+                        child: Text(
+                          'Oops, verifique as suas credenciais e tente novamente!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).errorColor,
+                              fontSize: 16),
+                        ),
+                      )
+                    ],
+                  );
+                }
+
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: _table(context, snapshot.data),
+                    )
+                  ],
+                );
+              }
             }),
       ),
     );

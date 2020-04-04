@@ -11,7 +11,11 @@ class AddressHelper {
     'gia': 'GIA',
   };
 
-  static getLabels(String key) {
+  static String getLabels(String key) {
     return LABELS[key] ?? null;
+  }
+
+  static String getRawCepValue(String cep) {
+    return cep.replaceAll('-', '');
   }
 }

@@ -20,26 +20,10 @@ class MyApp extends StatelessWidget {
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
           primarySwatch: Colors.teal,
+          primaryColor: Colors.teal,
           brightness: Brightness.dark,
           accentColor: Colors.teal),
       home: Home(),
     );
   }
 }
-
-//#71B7E3
-const MaterialColor primaryColor = const MaterialColor(
-  0xFF71B7E3,
-  const <int, Color>{
-    50: const Color(0xFF71B7E3),
-    100: const Color(0xFF71B7E3),
-    200: const Color(0xFF71B7E3),
-    300: const Color(0xFF71B7E3),
-    400: const Color(0xFF71B7E3),
-    500: const Color(0xFF71B7E3),
-    600: const Color(0xFF71B7E3),
-    700: const Color(0xFF71B7E3),
-    800: const Color(0xFF71B7E3),
-    900: const Color(0xFF71B7E3),
-  },
-);
