@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class Results extends StatelessWidget {
-  AddressRepository _addressRepository = AddressRepository();
+  final AddressRepository _addressRepository = AddressRepository();
 
   final String cep;
 
@@ -111,6 +111,7 @@ class Results extends StatelessWidget {
                   ],
                 );
               }
+              return Container();
             }),
       ),
     );
