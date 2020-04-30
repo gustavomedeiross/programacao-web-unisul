@@ -14,8 +14,9 @@ class _HomeState extends State<Home> {
   bool _isAddPersonDisabled = false;
 
   @override
-  initState() {
+  void initState() {
     _setCounter(0);
+    super.initState();
   }
 
   _setCounter(int quantity) {
@@ -55,7 +56,10 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display2,
+              style: TextStyle(
+                color: _counter < 10 ? Colors.green : Colors.red,
+                fontSize: 42.0,
+              ),
             ),
             SizedBox(
               height: 10,
@@ -82,6 +86,12 @@ class _HomeState extends State<Home> {
                     onPressed: () => _setCounter(1),
                     disabled: _isAddPersonDisabled),
               ],
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 10.0, right: 10.0),
+              child: LinearProgressIndicator(
+                value: _counter / 10,
+              ),
             ),
           ],
         ),
