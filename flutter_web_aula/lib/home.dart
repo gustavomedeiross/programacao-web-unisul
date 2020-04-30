@@ -1,10 +1,7 @@
-import 'package:flutter_web_aula/app_model.dart';
-import 'package:flutter_web_aula/constantes.dart';
-import 'package:flutter_web_aula/web/body.dart';
-import 'package:flutter_web_aula/web/header.dart';
-import 'package:flutter_web_aula/web/menu.dart';
+import 'package:flutter_web_aula/widgets/body.dart';
+import 'package:flutter_web_aula/widgets/header.dart';
+import 'package:flutter_web_aula/widgets/menu.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,63 +9,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Size get size => MediaQuery.of(context).size;
-  bool get exibeMenu => size.width > 500;
+  bool get showMenu => MediaQuery.of(context).size.width > 500;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          _header(),
-          _body(),
+          Header(),
+          Expanded(
+            child: Container(
+                child: Row(
+              children: <Widget>[
+                showMenu ? Menu() : Container(),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    child: Body(),
+                  ),
+                )
+              ],
+            )),
+          ),
         ],
       ),
     );
-  }
-
-  _header() {
-    return Container(
-      padding: EdgeInsets.all(16),
-      width: size.width,
-      height: alturaCabecalho,
-      color: Colors.blue,
-      child: Header(),
-    );
-
-  }
-
-  _body() {
-    return Container(
-      width: size.width,
-      height: size.height - alturaCabecalho,
-      child: exibeMenu
-          ? Row(
-        children: <Widget>[
-          _menu(),
-          _direita(),
-        ],
-      )
-          : _direita(),
-    );
-
-  }
-
-  _menu() {
-    return Container(
-      width: larguraMenu,
-      color: Colors.grey[100],
-      child: Menu(),
-    );
-  }
-
-  _direita() {
-    return Container(
-      //color: Colors.yellow,
-      padding: EdgeInsets.all(16),
-      width: exibeMenu ? size.width - larguraMenu : size.width,
-      child: Body(),
-    );
-
   }
 }

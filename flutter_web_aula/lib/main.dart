@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          builder: (context)=>AppModel(),
+          builder: (context) => AppModel(),
         )
       ],
       child: MaterialApp(
@@ -25,15 +25,15 @@ class MyApp extends StatelessWidget {
 
   _theme() {
     return ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-        splashColor: Colors.blue,
-        hoverColor: Colors.blue[100],
-        textTheme: TextTheme(
-          body1: TextStyle(
+      primarySwatch: Colors.blue,
+      scaffoldBackgroundColor: Colors.white,
+      splashColor: Colors.blue,
+      hoverColor: Colors.blue[100],
+      textTheme: TextTheme(
+        body1: TextStyle(
           fontSize: 22,
         ),
-    ),
+      ),
     );
   }
 }
