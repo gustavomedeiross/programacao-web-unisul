@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       splashColor: Colors.blue,
       hoverColor: Colors.blue[100],
       textTheme: TextTheme(
-        body1: TextStyle(
+        bodyText2: TextStyle(
           fontSize: 22,
         ),
       ),
