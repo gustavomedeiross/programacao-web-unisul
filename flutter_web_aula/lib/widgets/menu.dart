@@ -1,5 +1,5 @@
 import 'package:flutter_web_aula/app_model.dart';
-import 'package:flutter_web_aula/pages/car_page.dart';
+import 'package:flutter_web_aula/pages/cars/car_page.dart';
 import 'package:flutter_web_aula/pages/default_page.dart';
 import 'package:flutter_web_aula/pages/usuarios_page.dart';
 import 'package:flutter/material.dart';
