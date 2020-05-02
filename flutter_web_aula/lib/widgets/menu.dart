@@ -1,5 +1,5 @@
 import 'package:flutter_web_aula/app_model.dart';
-import 'package:flutter_web_aula/pages/carros_page.dart';
+import 'package:flutter_web_aula/pages/cars/car_page.dart';
 import 'package:flutter_web_aula/pages/default_page.dart';
 import 'package:flutter_web_aula/pages/usuarios_page.dart';
 import 'package:flutter/material.dart';
@@ -20,15 +20,11 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  List<ItemMenu> menus = [];
-
-  @override
-  void initState() {
-    super.initState();
-    menus.add(ItemMenu("Home", FontAwesomeIcons.home, PaginaDefault()));
-    menus.add(ItemMenu("Carros", FontAwesomeIcons.car, CarrosPage()));
-    menus.add(ItemMenu("Usuários", FontAwesomeIcons.user, UsuariosPage()));
-  }
+  final List<ItemMenu> menus = [
+    ItemMenu("Home", FontAwesomeIcons.home, PaginaDefault()),
+    ItemMenu("Carros", FontAwesomeIcons.car, CarPage()),
+    ItemMenu("Usuários", FontAwesomeIcons.user, UsuariosPage()),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +32,11 @@ class _MenuState extends State<Menu> {
       width: 230,
       color: Colors.grey[100],
       child: ListView.builder(
-          itemCount: menus.length,
-          itemBuilder: (context, index) {
-            ItemMenu item = menus[index];
-            return _itemMenu(item);
-          }),
+        itemCount: menus.length,
+        itemBuilder: (context, index) {
+          return _itemMenu(menus[index]);
+        },
+      ),
     );
   }
 
