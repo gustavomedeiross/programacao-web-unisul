@@ -1,7 +1,7 @@
 import 'package:flutter_web_aula/app_model.dart';
-import 'package:flutter_web_aula/pages/cars/car_page.dart';
-import 'package:flutter_web_aula/pages/default_page.dart';
-import 'package:flutter_web_aula/pages/usuarios_page.dart';
+import 'package:flutter_web_aula/pages/cars/car_list.dart';
+import 'package:flutter_web_aula/pages/default.dart';
+import 'package:flutter_web_aula/pages/users.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -21,9 +21,9 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   final List<ItemMenu> menus = [
-    ItemMenu("Home", FontAwesomeIcons.home, PaginaDefault()),
+    ItemMenu("Home", FontAwesomeIcons.home, DefaultPage()),
     ItemMenu("Carros", FontAwesomeIcons.car, CarPage()),
-    ItemMenu("Usuários", FontAwesomeIcons.user, UsuariosPage()),
+    ItemMenu("Usuários", FontAwesomeIcons.user, UsersPage()),
   ];
 
   @override

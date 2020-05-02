@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_aula/models/car_model.dart';
-import 'package:flutter_web_aula/pages/cars/car_detail_page.dart';
+import 'package:flutter_web_aula/models/car.dart';
+import 'package:flutter_web_aula/pages/cars/car_detail.dart';
 
 class CarPage extends StatefulWidget {
   @override
@@ -8,26 +8,26 @@ class CarPage extends StatefulWidget {
 }
 
 class _CarPageState extends State<CarPage> {
-  final List<CarModel> cars = [
-    CarModel(
+  final List<Car> cars = [
+    Car(
       name: 'Citroen Creative Technology',
       color: 'Preto',
       model: 'Mustang',
       price: 'R\$ 1.000,00',
     ),
-    CarModel(
+    Car(
       name: 'Citroen Creative Technology',
       color: 'Preto',
       model: 'Mustang',
       price: 'R\$ 1.000,00',
     ),
-    CarModel(
+    Car(
       name: 'Citroen Creative Technology',
       color: 'Preto',
       model: 'Mustang',
       price: 'R\$ 1.000,00',
     ),
-    CarModel(
+    Car(
       name: 'Citroen Creative Technology',
       color: 'Preto',
       model: 'Mustang',
@@ -47,7 +47,7 @@ class _CarPageState extends State<CarPage> {
           childAspectRatio: 1.5,
         ),
         itemBuilder: (context, index) {
-          CarModel car = cars[index];
+          Car car = cars[index];
           return LayoutBuilder(
             builder: (context, constraints) {
               return Card(

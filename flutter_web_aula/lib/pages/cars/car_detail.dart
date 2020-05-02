@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_aula/models/car_model.dart';
+import 'package:flutter_web_aula/models/car.dart';
 
 class CarDetailPage extends StatelessWidget {
-  final CarModel car;
+  final Car car;
 
   const CarDetailPage(this.car);
 

@@ -1,11 +1,12 @@
-import 'package:flutter_web_aula/pages/default_page.dart';
+import 'package:flutter_web_aula/pages/default.dart';
 import 'package:flutter/material.dart';
 
 class AppModel extends ChangeNotifier {
   Widget page;
 
   AppModel() {
-    page = PaginaDefault();
+    this.page = DefaultPage();
+    notifyListeners();
   }
 
   setPage(Widget page) {

@@ -1,11 +1,11 @@
-class CarModel {
+class Car {
   final String name;
   final String model;
   final String color;
   final String image;
   final String price;
 
-  CarModel({
+  Car({
     this.name,
     this.model,
     this.color,
@@ -14,8 +14,8 @@ class CarModel {
         "http://www.livroandroid.com.br/livro/carros/esportivos/Renault_Megane_Trophy.png",
   });
 
-  factory CarModel.fromJson(Map<String, dynamic> json) {
-    return CarModel(
+  factory Car.fromJson(Map<String, dynamic> json) {
+    return Car(
       name: json['name'],
       price: json['price'],
       model: json['model'],
