@@ -7,23 +7,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class ItemMenu {
-  String titulo;
-  IconData icone;
-  Widget pagina;
-  bool selecionado = false;
-  ItemMenu(this.titulo, this.icone, this.pagina);
+  String title;
+  IconData icon;
+  bool selected;
+  ItemMenu({ @required this.title, @required this.icon , this.selected = false});
 }
 
 class Menu extends StatefulWidget {
+  final Function(int) onTap;
+
+  Menu({ @required this.onTap });
+
   @override
   _MenuState createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
-  final List<ItemMenu> menus = [
-    ItemMenu("Home", FontAwesomeIcons.home, DefaultPage()),
-    ItemMenu("Carros", FontAwesomeIcons.car, CarPage()),
-    ItemMenu("Usuários", FontAwesomeIcons.user, UsersPage()),
+  List<ItemMenu> menus = [
+    ItemMenu(title: "Home", icon: FontAwesomeIcons.home, selected: true),
+    ItemMenu(title: "Carros", icon: FontAwesomeIcons.car, ),
+    ItemMenu(title: "Usuários", icon: FontAwesomeIcons.user, ),
   ];
 
   @override
@@ -34,32 +37,34 @@ class _MenuState extends State<Menu> {
       child: ListView.builder(
         itemCount: menus.length,
         itemBuilder: (context, index) {
-          return _itemMenu(menus[index]);
+          return _itemMenu(menus[index], index);
         },
       ),
     );
   }
 
-  _itemMenu(ItemMenu item) {
+  _itemMenu(ItemMenu item, int index) {
     return Material(
       color:
-          item.selecionado ? Theme.of(context).hoverColor : Colors.transparent,
+          item.selected ? Theme.of(context).hoverColor : Colors.transparent,
       child: InkWell(
         onTap: () {
-          AppModel app = Provider.of<AppModel>(context, listen: false);
-          app.setPage(item.pagina);
           setState(() {
-            menus.forEach((item) => item.selecionado = false);
-            item.selecionado = true;
+            this.menus = this.menus.asMap().map((i, v) {
+              v.selected = (i == index);
+              return MapEntry(i, v);
+            }).values.toList();
           });
+
+          widget.onTap(index);
         },
         child: ListTile(
-          leading: Icon(item.icone),
+          leading: Icon(item.icon),
           title: Text(
-            item.titulo,
+            item.title,
             style: TextStyle(
                 fontWeight:
-                    item.selecionado ? FontWeight.bold : FontWeight.normal),
+                    item.selected ? FontWeight.bold : FontWeight.normal),
           ),
         ),
       ),
