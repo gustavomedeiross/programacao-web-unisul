@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/models/car.dart';
+import 'package:flutter_web_aula/models/custom_navigator.dart';
 import 'package:flutter_web_aula/pages/cars/car_detail.dart';
+import 'package:provider/provider.dart';
 
 class CarPage extends StatefulWidget {
   @override
@@ -8,6 +11,12 @@ class CarPage extends StatefulWidget {
 }
 
 class _CarPageState extends State<CarPage> {
+
+  _handleCarClick(Car car) {
+    AppModel app = Provider.of<AppModel>(context, listen: false);
+    app.setNavigation(CustomNavigator(title: car.name ?? 'Detalhes', page: CarDetailPage(context, car)));
+  }
+
   final List<Car> cars = [
     Car(
       name: 'Citroen Creative Technology',
@@ -56,7 +65,7 @@ class _CarPageState extends State<CarPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CarDetailPage(car),
+                        builder: (context) => CarDetailPage(context, car),
                       ),
                     );
                   },

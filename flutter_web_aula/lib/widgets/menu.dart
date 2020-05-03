@@ -1,4 +1,5 @@
 import 'package:flutter_web_aula/app_model.dart';
+import 'package:flutter_web_aula/models/custom_navigator.dart';
 import 'package:flutter_web_aula/pages/cars/car_list.dart';
 import 'package:flutter_web_aula/pages/default.dart';
 import 'package:flutter_web_aula/pages/users.dart';
@@ -7,67 +8,61 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class ItemMenu {
-  String title;
-  IconData icon;
-  bool selected;
-  ItemMenu({ @required this.title, @required this.icon , this.selected = false});
+  String titulo;
+  IconData icone;
+  Widget pagina;
+  bool selecionado = false;
+  ItemMenu(this.titulo, this.icone, this.pagina);
 }
 
 class Menu extends StatefulWidget {
-  final Function(int) onTap;
-
-  Menu({ @required this.onTap });
-
   @override
   _MenuState createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
-  List<ItemMenu> menus = [
-    ItemMenu(title: "Home", icon: FontAwesomeIcons.home, selected: true),
-    ItemMenu(title: "Carros", icon: FontAwesomeIcons.car, ),
-    ItemMenu(title: "Usuários", icon: FontAwesomeIcons.user, ),
-  ];
+  List<ItemMenu> menus = [];
 
+  @override
+  void initState() {
+    super.initState();
+    menus.add(ItemMenu("Home", FontAwesomeIcons.home, DefaultPage()));
+    menus.add(ItemMenu("Carros", FontAwesomeIcons.car, CarPage()));
+    menus.add(ItemMenu("Usuários", FontAwesomeIcons.user, UsersPage()));
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 230,
       color: Colors.grey[100],
       child: ListView.builder(
-        itemCount: menus.length,
-        itemBuilder: (context, index) {
-          return _itemMenu(menus[index], index);
-        },
+          itemCount: menus.length,
+          itemBuilder: (context, index) {
+            ItemMenu item = menus[index];
+            return _itemMenu(item);
+          }
       ),
     );
   }
 
-  _itemMenu(ItemMenu item, int index) {
+  _itemMenu(ItemMenu item) {
     return Material(
-      color:
-          item.selected ? Theme.of(context).hoverColor : Colors.transparent,
+      color: item.selecionado ? Theme.of(context).hoverColor : Colors.transparent,
       child: InkWell(
-        onTap: () {
+        onTap: (){
+          AppModel app = Provider.of<AppModel>(context, listen: false);
+          app.setNavigation(CustomNavigator(title: item.titulo, page: item.pagina), replace: true);
           setState(() {
-            this.menus = this.menus.asMap().map((i, v) {
-              v.selected = (i == index);
-              return MapEntry(i, v);
-            }).values.toList();
+            menus.forEach((item) => item.selecionado = false);
+            item.selecionado = true;
           });
-
-          widget.onTap(index);
         },
         child: ListTile(
-          leading: Icon(item.icon),
-          title: Text(
-            item.title,
-            style: TextStyle(
-                fontWeight:
-                    item.selected ? FontWeight.bold : FontWeight.normal),
-          ),
+          leading: Icon(item.icone),
+          title: Text(item.titulo, style: TextStyle(fontWeight: item.selecionado ? FontWeight.bold : FontWeight.normal),),
         ),
       ),
     );
   }
 }
+

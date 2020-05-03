@@ -1,9 +1,9 @@
-import 'package:flutter_web_aula/pages/cars/car_list.dart';
-import 'package:flutter_web_aula/pages/default.dart';
-import 'package:flutter_web_aula/pages/users.dart';
+import 'package:flutter_web_aula/app_model.dart';
+import 'package:flutter_web_aula/widgets/body.dart';
 import 'package:flutter_web_aula/widgets/header.dart';
 import 'package:flutter_web_aula/widgets/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,14 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-//  bool get showMenu => MediaQuery.of(context).size.width > 500;
-  int _currentIndex = 0;
-
-  final List<Widget> _children = [
-    DefaultPage(),
-    CarPage(),
-    UsersPage(),
-  ];
+  Size get size => MediaQuery.of(context).size;
+  bool get showMenu => size.width > 500;
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +23,21 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: Container(
                 child: Row(
-                children: <Widget>[
-//                showMenu ? Menu() : Container(),
-                Menu(onTap: (index) => setState(() {
-                    _currentIndex = index;
-                  }),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(16),
-                    child: _children[_currentIndex],
-                  ),
-                )
-              ],
-            )),
+                  children: <Widget>[
+                      showMenu ? Menu() : Container(),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        child: Body(),
+                      ),
+                    )
+                  ],
+                )),
           ),
         ],
       ),
     );
   }
 }
+
+

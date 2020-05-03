@@ -8,14 +8,8 @@ class UsersPage extends StatefulWidget {
 class _UsersPageState extends State<UsersPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _body(),
-    );
-  }
-
-  _body() {
     return Center(
-      child: Text("Usuarios"),
+      child: Text("Users2"),
     );
   }
 }

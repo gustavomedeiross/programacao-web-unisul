@@ -1,59 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/models/car.dart';
+import 'package:provider/provider.dart';
 
 class CarDetailPage extends StatelessWidget {
+  final BuildContext context;
   final Car car;
 
-  const CarDetailPage(this.car);
+  const CarDetailPage(this.context, this.car);
+
+  _handleClick() {
+    AppModel app = Provider.of<AppModel>(this.context, listen: false);
+    app.pop();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(car.name),
-      ),
-      body: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width * .7,
-          height: MediaQuery.of(context).size.height * .7,
-          child: Card(
-            color: Colors.deepPurple[400],
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Image.network(car.image),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 40.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 30.0),
-                      Container(
-                        child: Text(car.name),
-                      ),
-                      SizedBox(height: 30.0),
-                      Container(
-                        child: Text(car.model),
-                      ),
-                      SizedBox(height: 30.0),
-                      Container(
-                        child: Text(car.color),
-                      ),
-                      SizedBox(height: 30.0),
-                      Container(
-                        margin: EdgeInsets.only(right: 10.0),
-                        alignment: Alignment.centerRight,
-                        child: Text(car.price),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.network(car.image),
+          Text(
+            car.name ?? ' ',
+            overflow: TextOverflow.ellipsis,
           ),
-        ),
+          Text(
+            car.description ?? ' ',
+            overflow: TextOverflow.ellipsis,
+          ),
+          RaisedButton(
+            child: Text('Voltar'),
+            onPressed: _handleClick,
+          )
+        ],
       ),
     );
   }

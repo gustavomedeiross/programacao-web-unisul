@@ -1,6 +1,7 @@
 class Car {
   final String name;
   final String model;
+  final String description;
   final String color;
   final String image;
   final String price;
@@ -8,6 +9,7 @@ class Car {
   Car({
     this.name,
     this.model,
+    this.description,
     this.color,
     this.price,
     this.image =
@@ -18,6 +20,7 @@ class Car {
     return Car(
       name: json['name'],
       price: json['price'],
+      description: json['description'],
       model: json['model'],
       color: json['color'],
       image: json['image'],
@@ -28,6 +31,7 @@ class Car {
     return {
       'name': this.name,
       'model': this.model,
+      'description': this.description,
       'color': this.color,
       'price': this.price,
       'image': this.image,
