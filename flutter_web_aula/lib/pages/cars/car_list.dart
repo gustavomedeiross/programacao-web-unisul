@@ -30,66 +30,67 @@ class _CarPageState extends State<CarPage> {
           );
         }
 
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError) {
-            return Text('erro');
-          }
+        if (!(snapshot.connectionState == ConnectionState.done)) {
+          throw UnimplementedError();
+        }
 
-          if (snapshot.hasData) {
-            List<Car> cars = snapshot.data;
+        if (snapshot.hasError) {
+          throw UnimplementedError();
+        }
 
-            return GridView.builder(
-              itemCount: cars.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
-                childAspectRatio: 1.5,
-              ),
-              itemBuilder: (context, index) {
-                Car car = cars[index];
-                return LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Card(
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CarDetailPage(context, car),
-                            ),
-                          );
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxWidth: 300,
-                              ),
-                              child: Container(
-                                child: Image.network(car.image ?? "http://www.livroandroid.com.br/livro/carros/esportivos/Renault_Megane_Trophy.png"),
-                              ),
-                            ),
-                            Text(
-                              car.name ?? 'N/A',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 14),
-                            ),
-                          ],
+        if (!snapshot.hasData) {
+          throw UnimplementedError();
+        }
+
+        List<Car> cars = snapshot.data;
+
+        return GridView.builder(
+          itemCount: cars.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,
+            childAspectRatio: 1.5,
+          ),
+          itemBuilder: (context, index) {
+            Car car = cars[index];
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return Card(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CarDetailPage(context, car),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: 300,
+                          ),
+                          child: Container(
+                            child: Image.network(car.image ?? "http://www.livroandroid.com.br/livro/carros/esportivos/Renault_Megane_Trophy.png"),
+                          ),
+                        ),
+                        Text(
+                          car.name ?? 'N/A',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             );
-          }
+          },
+        );
 
-
-        }
-
-        return Text('oi');
       },
     );
   }
