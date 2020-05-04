@@ -3,7 +3,6 @@ import 'package:flutter_web_aula/models/custom_navigator.dart';
 import 'package:flutter_web_aula/pages/cars/car_list.dart';
 import 'package:flutter_web_aula/pages/cars/create.dart';
 import 'package:flutter_web_aula/pages/default.dart';
-import 'package:flutter_web_aula/pages/upload.dart';
 import 'package:flutter_web_aula/pages/users.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,9 +30,9 @@ class _MenuState extends State<Menu> {
     menus.add(ItemMenu("Home", FontAwesomeIcons.home, DefaultPage()));
     menus.add(ItemMenu("Carros", FontAwesomeIcons.car, CarPage()));
     menus.add(ItemMenu("Usuários", FontAwesomeIcons.user, UsersPage()));
-    menus.add(ItemMenu("Upload", FontAwesomeIcons.upload, UploadPage()));
     menus.add(ItemMenu("Cadastrar Carro", FontAwesomeIcons.car, CarCreate()));
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,18 +43,20 @@ class _MenuState extends State<Menu> {
           itemBuilder: (context, index) {
             ItemMenu item = menus[index];
             return _itemMenu(item);
-          }
-      ),
+          }),
     );
   }
 
   _itemMenu(ItemMenu item) {
     return Material(
-      color: item.selecionado ? Theme.of(context).hoverColor : Colors.transparent,
+      color:
+          item.selecionado ? Theme.of(context).hoverColor : Colors.transparent,
       child: InkWell(
-        onTap: (){
+        onTap: () {
           AppModel app = Provider.of<AppModel>(context, listen: false);
-          app.setNavigation(CustomNavigator(title: item.titulo, page: item.pagina), replace: true);
+          app.setNavigation(
+              CustomNavigator(title: item.titulo, page: item.pagina),
+              replace: true);
           setState(() {
             menus.forEach((item) => item.selecionado = false);
             item.selecionado = true;
@@ -63,10 +64,14 @@ class _MenuState extends State<Menu> {
         },
         child: ListTile(
           leading: Icon(item.icone),
-          title: Text(item.titulo, style: TextStyle(fontWeight: item.selecionado ? FontWeight.bold : FontWeight.normal),),
+          title: Text(
+            item.titulo,
+            style: TextStyle(
+                fontWeight:
+                    item.selecionado ? FontWeight.bold : FontWeight.normal),
+          ),
         ),
       ),
     );
   }
 }
-

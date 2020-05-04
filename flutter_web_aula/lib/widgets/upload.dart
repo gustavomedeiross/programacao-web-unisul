@@ -6,12 +6,12 @@ import 'package:flutter_web_aula/repositories/image_repository.dart';
 import 'package:flutter_web_aula/utils/api_response.dart';
 import 'package:flutter_web_aula/utils/upload_helper.dart';
 
-class UploadPage extends StatefulWidget {
+class UploadInput extends StatefulWidget {
   @override
-  _UploadPageState createState() => _UploadPageState();
+  _UploadInputState createState() => _UploadInputState();
 }
 
-class _UploadPageState extends State<UploadPage> {
+class _UploadInputState extends State<UploadInput> {
   String url;
   bool showProgress = false;
   final _uploadHelper = UploadHelper();
@@ -27,7 +27,7 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   _setUploadState(UploadState state) {
-    if(state.started) {
+    if (state.started) {
       setState(() {
         showProgress = true;
       });
@@ -37,7 +37,8 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   _upload(FileUpload file) async {
-    ApiResponse<String> response = await _imageRepository.store(file.fileName, file.mimeType, file.base64);
+    ApiResponse<String> response =
+        await _imageRepository.store(file.fileName, file.mimeType, file.base64);
 
     if (response.ok) {
       String url = response.result;
@@ -54,11 +55,13 @@ class _UploadPageState extends State<UploadPage> {
 
   _mountScreen() {
     if (url == null || showProgress) {
-      if(showProgress) {
+      if (showProgress) {
         return CircularProgressIndicator();
       }
 
-      return FlutterLogo(size: 50,);
+      return FlutterLogo(
+        size: 50,
+      );
     } else {
       return InkWell(
         onTap: () {
@@ -77,33 +80,34 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        SizedBox(
-          height: 20,
-        ),
-        Center(
-          child: RaisedButton(
-            child: Text('Upload'),
-            onPressed: _handlePress,
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 20,
           ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Center(
-          child: Container(
-            color: Colors.grey[100],
-            child: ConstrainedBox(
-              constraints: BoxConstraints.tightFor(height: 250),
-              child: Center(
-                child: _mountScreen(),
+          Center(
+            child: RaisedButton(
+              child: Text('Upload'),
+              onPressed: _handlePress,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Container(
+              color: Colors.grey[100],
+              child: ConstrainedBox(
+                constraints: BoxConstraints.tightFor(height: 250),
+                child: Center(
+                  child: _mountScreen(),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
-

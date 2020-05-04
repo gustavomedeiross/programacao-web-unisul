@@ -5,7 +5,6 @@ import 'package:flutter_web_aula/utils/api_response.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 class CarRepository {
   index() async {
     final String url = 'https://carros-springboot.herokuapp.com/api/v2/carros';
@@ -21,7 +20,7 @@ class CarRepository {
     return cars;
   }
 
-  store(BuildContext context, Car car) async {
+  store(Car car) async {
     try {
       String url = 'https://carros-springboot.herokuapp.com/api/v2/carros';
       String body = json.encode(car.toJson());
@@ -33,7 +32,7 @@ class CarRepository {
 
       Map decodedResponse = json.decode(response.body);
 
-      if(response.statusCode == 201) {
+      if (response.statusCode == 201) {
         Car car = Car.fromJson(decodedResponse);
         return ApiResponse.ok();
       }

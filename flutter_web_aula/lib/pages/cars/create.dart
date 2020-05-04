@@ -3,6 +3,7 @@ import 'package:flutter_web_aula/models/car.dart';
 import 'package:flutter_web_aula/repositories/car_repository.dart';
 import 'package:flutter_web_aula/utils/alert.dart';
 import 'package:flutter_web_aula/utils/api_response.dart';
+import 'package:flutter_web_aula/widgets/upload.dart';
 
 class CarCreate extends StatefulWidget {
   @override
@@ -17,8 +18,12 @@ class _CarCreateState extends State<CarCreate> {
 
   final _carRepository = CarRepository();
 
-
-  Widget _textFormField({ String label, String hint, TextEditingController controller, Function(String) validator, bool obscureText = false}) {
+  Widget _textFormField(
+      {String label,
+      String hint,
+      TextEditingController controller,
+      Function(String) validator,
+      bool obscureText = false}) {
     return TextFormField(
       controller: controller,
       validator: validator,
@@ -34,23 +39,20 @@ class _CarCreateState extends State<CarCreate> {
     );
   }
 
-  _button(String text, { onPressed }) {
+  _button(String text, {onPressed}) {
     return Container(
-       height: 50,
-       width: 250,
-       child: RaisedButton(
-         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-         onPressed: onPressed,
-         color: Colors.blue,
-         child: Text(
-           text,
-           style: TextStyle(
-               color: Colors.white,
-               fontSize: 18
-           ),
-         ),
-       ),
-     );
+      height: 50,
+      width: 250,
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        onPressed: onPressed,
+        color: Colors.blue,
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
+      ),
+    );
   }
 
   _handleCancelClick() {
@@ -63,38 +65,52 @@ class _CarCreateState extends State<CarCreate> {
     car.description = _descriptionController.text;
     car.type = _typeController.text;
 
-    ApiResponse response = await _carRepository.store(context, car);
+    ApiResponse response = await _carRepository.store(car);
 
-    if(response.ok) {
+    if (response.ok) {
       alert(context, 'Carro Salvo com sucesso', 'Cadastro');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(16),
-        child: Form(
-          key: this._formKey,
-          child: ListView(
-            children: <Widget>[
-              Divider(),
-              _textFormField(label: 'Tipo', hint: 'Clássico, Esportivo ou Luxo', controller: _typeController),
-              Divider(),
-              _textFormField(label: 'Nome', hint: 'Nome do Carro', controller: _nameController),
-              Divider(),
-              _textFormField(label: 'Descrição', hint: 'Descrição do Carro', controller: _descriptionController),
-              SizedBox(height: 20,),
-              Row(
-                children: <Widget>[
-                  _button('Cancelar', onPressed: _handleCancelClick),
-                  SizedBox(width: 30,),
-                  _button('Cadastrar', onPressed: _handleRegisterClick)
-                ],
-              ),
-            ],
-          ),
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Form(
+        key: this._formKey,
+        child: ListView(
+          children: <Widget>[
+            _textFormField(
+                label: 'Tipo',
+                hint: 'Clássico, Esportivo ou Luxo',
+                controller: _typeController),
+            Divider(),
+            _textFormField(
+                label: 'Nome',
+                hint: 'Nome do Carro',
+                controller: _nameController),
+            Divider(),
+            _textFormField(
+                label: 'Descrição',
+                hint: 'Descrição do Carro',
+                controller: _descriptionController),
+            SizedBox(
+              height: 20,
+            ),
+            UploadInput(),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: <Widget>[
+                _button('Cancelar', onPressed: _handleCancelClick),
+                SizedBox(
+                  width: 30,
+                ),
+                _button('Cadastrar', onPressed: _handleRegisterClick)
+              ],
+            ),
+          ],
         ),
       ),
     );
