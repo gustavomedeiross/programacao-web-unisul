@@ -1,6 +1,7 @@
 import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_web_aula/pages/login.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: _theme(),
-        home: HomePage(),
+        home: LoginPage(),
       ),
     );
   }

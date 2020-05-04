@@ -22,7 +22,7 @@ class _CarPageState extends State<CarPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _carRepository.getCars(),
+      future: _carRepository.index(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
