@@ -15,11 +15,6 @@ class CarPage extends StatefulWidget {
 class _CarPageState extends State<CarPage> {
   final _carRepository = CarRepository();
 
-  _handleCarClick(Car car) {
-    AppModel app = Provider.of<AppModel>(context, listen: false);
-    app.setNavigation(CustomNavigator(title: car.name ?? 'Detalhes', page: CarDetailPage(context, car)));
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -76,12 +71,8 @@ class _CarPageState extends State<CarPage> {
                       return Card(
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CarDetailPage(context, car),
-                              ),
-                            );
+                            AppModel app = Provider.of<AppModel>(this.context, listen: false);
+                            app.setNavigation(CustomNavigator(title: car.name ?? 'Detalhe de carro', page: CarDetailPage(car)));
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,

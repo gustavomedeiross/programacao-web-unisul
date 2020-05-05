@@ -3,12 +3,16 @@ import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/models/car.dart';
 import 'package:provider/provider.dart';
 
-class CarDetailPage extends StatelessWidget {
-  final BuildContext context;
+class CarDetailPage extends StatefulWidget {
   final Car car;
 
-  const CarDetailPage(this.context, this.car);
+  const CarDetailPage(this.car);
 
+  @override
+  _CarDetailPageState createState() => _CarDetailPageState();
+}
+
+class _CarDetailPageState extends State<CarDetailPage> {
   _handleClick() {
     AppModel app = Provider.of<AppModel>(this.context, listen: false);
     app.pop();
@@ -20,13 +24,13 @@ class CarDetailPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.network(car.image),
+          Image.network(widget.car.image),
           Text(
-            car.name ?? ' ',
+            widget.car.name ?? ' ',
             overflow: TextOverflow.ellipsis,
           ),
           Text(
-            car.description ?? ' ',
+            widget.car.description ?? ' ',
             overflow: TextOverflow.ellipsis,
           ),
           RaisedButton(
