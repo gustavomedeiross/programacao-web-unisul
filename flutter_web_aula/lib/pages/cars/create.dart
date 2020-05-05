@@ -12,9 +12,10 @@ class CarCreate extends StatefulWidget {
 
 class _CarCreateState extends State<CarCreate> {
   final _formKey = GlobalKey<FormState>();
+
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
-  final _typeController = TextEditingController();
+  String _type = 'Clássico';
   final _imageController = TextEditingController();
 
   final _carRepository = CarRepository();
@@ -76,7 +77,7 @@ class _CarCreateState extends State<CarCreate> {
     Car car = Car();
     car.name = _nameController.text;
     car.description = _descriptionController.text;
-    car.type = _typeController.text;
+    car.type = _type;
     car.image = _imageController.text;
 
     ApiResponse response = await _carRepository.store(car);
@@ -94,13 +95,27 @@ class _CarCreateState extends State<CarCreate> {
         key: this._formKey,
         child: ListView(
           children: <Widget>[
-            _textFormField(
-              label: 'Tipo',
-              hint: 'Clássico, Esportivo ou Luxo',
-              controller: _typeController,
-              validator: _requiredValidator
-            ),
-            Divider(),
+//            _textFormField(
+//              label: 'Tipo',
+//              hint: 'Clássico, Esportivo ou Luxo',
+//              controller: _typeController,
+//              validator: _requiredValidator
+//            ),
+          DropdownButton<String>(
+            value: _type,
+            underline: Container(height: 1, color: Colors.black38,),
+            onChanged: (String selectedValue) {
+              setState(() {
+                _type = selectedValue;
+              });
+            },
+            items: <String>['Clássico', 'Esportivo', 'Luxo'].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
             _textFormField(
                 label: 'Nome',
                 hint: 'Nome do Carro',
