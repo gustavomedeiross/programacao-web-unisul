@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/models/car.dart';
+import 'package:flutter_web_aula/models/custom_navigator.dart';
 import 'package:flutter_web_aula/repositories/car_repository.dart';
 import 'package:flutter_web_aula/utils/alert.dart';
 import 'package:flutter_web_aula/utils/api_response.dart';
 import 'package:flutter_web_aula/widgets/upload.dart';
+import 'package:provider/provider.dart';
 
 class CarCreate extends StatefulWidget {
   @override
@@ -66,7 +69,8 @@ class _CarCreateState extends State<CarCreate> {
   }
 
   _handleCancelClick() {
-    print('Cancelou');
+    AppModel app = Provider.of<AppModel>(context, listen: false);
+    app.pop();
   }
 
   _handleRegisterClick() async {

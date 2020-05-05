@@ -1,9 +1,7 @@
-import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/widgets/body.dart';
 import 'package:flutter_web_aula/widgets/header.dart';
 import 'package:flutter_web_aula/widgets/menu.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
