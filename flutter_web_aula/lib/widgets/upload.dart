@@ -7,6 +7,10 @@ import 'package:flutter_web_aula/utils/api_response.dart';
 import 'package:flutter_web_aula/utils/upload_helper.dart';
 
 class UploadInput extends StatefulWidget {
+  final TextEditingController controller;
+
+  UploadInput({ this.controller });
+
   @override
   _UploadInputState createState() => _UploadInputState();
 }
@@ -46,6 +50,8 @@ class _UploadInputState extends State<UploadInput> {
         this.url = url;
         this.showProgress = false;
       });
+
+      widget.controller.text = this.url;
     }
   }
 

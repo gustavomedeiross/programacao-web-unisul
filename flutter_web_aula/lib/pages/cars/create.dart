@@ -15,8 +15,17 @@ class _CarCreateState extends State<CarCreate> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _typeController = TextEditingController();
+  final _imageController = TextEditingController();
 
   final _carRepository = CarRepository();
+
+  String _requiredValidator(String text) {
+    if (text.isEmpty) {
+      return 'O campo é obrigatório';
+    }
+
+    return null;
+  }
 
   Widget _textFormField(
       {String label,
@@ -60,10 +69,15 @@ class _CarCreateState extends State<CarCreate> {
   }
 
   _handleRegisterClick() async {
+    if(!_formKey.currentState.validate()) {
+      return;
+    }
+
     Car car = Car();
     car.name = _nameController.text;
     car.description = _descriptionController.text;
     car.type = _typeController.text;
+    car.image = _imageController.text;
 
     ApiResponse response = await _carRepository.store(car);
 
@@ -81,23 +95,29 @@ class _CarCreateState extends State<CarCreate> {
         child: ListView(
           children: <Widget>[
             _textFormField(
-                label: 'Tipo',
-                hint: 'Clássico, Esportivo ou Luxo',
-                controller: _typeController),
+              label: 'Tipo',
+              hint: 'Clássico, Esportivo ou Luxo',
+              controller: _typeController,
+              validator: _requiredValidator
+            ),
             Divider(),
             _textFormField(
                 label: 'Nome',
                 hint: 'Nome do Carro',
-                controller: _nameController),
+                controller: _nameController,
+                validator: _requiredValidator
+            ),
             Divider(),
             _textFormField(
                 label: 'Descrição',
                 hint: 'Descrição do Carro',
-                controller: _descriptionController),
+                controller: _descriptionController,
+                validator: _requiredValidator
+            ),
             SizedBox(
               height: 20,
             ),
-            UploadInput(),
+            UploadInput(controller: _imageController,),
             SizedBox(
               height: 20,
             ),
