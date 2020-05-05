@@ -86,34 +86,32 @@ class _UploadInputState extends State<UploadInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 20,
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 20,
+        ),
+        Center(
+          child: RaisedButton(
+            child: Text('Upload'),
+            onPressed: _handlePress,
           ),
-          Center(
-            child: RaisedButton(
-              child: Text('Upload'),
-              onPressed: _handlePress,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Center(
-            child: Container(
-              color: Colors.grey[100],
-              child: ConstrainedBox(
-                constraints: BoxConstraints.tightFor(height: 250),
-                child: Center(
-                  child: _mountScreen(),
-                ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Center(
+          child: Container(
+            color: Colors.grey[100],
+            child: ConstrainedBox(
+              constraints: BoxConstraints.tightFor(height: 250),
+              child: Center(
+                child: _mountScreen(),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

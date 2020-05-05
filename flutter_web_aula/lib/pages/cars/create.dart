@@ -105,28 +105,30 @@ class _CarCreateState extends State<CarCreate> {
 //              controller: _typeController,
 //              validator: _requiredValidator
 //            ),
-          DropdownButton<String>(
-            value: _type,
-            underline: Container(height: 1, color: Colors.black38,),
-            onChanged: (String selectedValue) {
-              setState(() {
-                _type = selectedValue;
-              });
-            },
-            items: <String>['Clássico', 'Esportivo', 'Luxo'].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
+//            SizedBox(height: 10,),
+            DropdownButton<String>(
+              value: _type,
+              underline: Container(height: 1, color: Colors.black38,),
+              onChanged: (String selectedValue) {
+                setState(() {
+                  _type = selectedValue;
+                });
+              },
+              items: <String>['Clássico', 'Esportivo', 'Luxo'].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 20,),
             _textFormField(
                 label: 'Nome',
                 hint: 'Nome do Carro',
                 controller: _nameController,
                 validator: _requiredValidator
             ),
-            Divider(),
+            SizedBox(height: 20,),
             _textFormField(
                 label: 'Descrição',
                 hint: 'Descrição do Carro',
