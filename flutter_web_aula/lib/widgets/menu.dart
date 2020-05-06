@@ -1,6 +1,6 @@
 import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/models/custom_navigator.dart';
-import 'package:flutter_web_aula/pages/cars/car_list.dart';
+import 'package:flutter_web_aula/pages/cars/index.dart';
 import 'package:flutter_web_aula/pages/default.dart';
 import 'package:flutter_web_aula/pages/users.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class _MenuState extends State<Menu> {
   void initState() {
     super.initState();
     menus.add(ItemMenu("Home", FontAwesomeIcons.home, DefaultPage()));
-    menus.add(ItemMenu("Carros", FontAwesomeIcons.car, CarPage()));
+    menus.add(ItemMenu("Carros", FontAwesomeIcons.car, CarIndexPage()));
     menus.add(ItemMenu("Usuários", FontAwesomeIcons.user, UsersPage()));
   }
 

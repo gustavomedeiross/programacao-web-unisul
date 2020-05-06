@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/models/car.dart';
 import 'package:flutter_web_aula/models/custom_navigator.dart';
-import 'package:flutter_web_aula/pages/cars/car_detail.dart';
+import 'package:flutter_web_aula/pages/cars/show.dart';
 import 'package:flutter_web_aula/pages/cars/create.dart';
 import 'package:flutter_web_aula/repositories/car_repository.dart';
 import 'package:provider/provider.dart';
 
-class CarPage extends StatefulWidget {
+class CarIndexPage extends StatefulWidget {
   @override
-  _CarPageState createState() => _CarPageState();
+  _CarIndexPageState createState() => _CarIndexPageState();
 }
 
-class _CarPageState extends State<CarPage> {
+class _CarIndexPageState extends State<CarIndexPage> {
   final _carRepository = CarRepository();
 
   @override
@@ -72,7 +72,7 @@ class _CarPageState extends State<CarPage> {
                         child: InkWell(
                           onTap: () {
                             AppModel app = Provider.of<AppModel>(this.context, listen: false);
-                            app.setNavigation(CustomNavigator(title: car.name ?? 'Detalhe de carro', page: CarDetailPage(car)));
+                            app.setNavigation(CustomNavigator(title: car.name ?? 'Detalhe de carro', page: CarShowPage(car)));
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,

@@ -8,7 +8,7 @@ class Header extends StatefulWidget {
 }
 
 class _HeaderState extends State<Header> {
-  GlobalKey _estadoMenu = GlobalKey();
+  GlobalKey _menuState = GlobalKey();
   Size get size => MediaQuery.of(context).size;
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,11 @@ class _HeaderState extends State<Header> {
       padding: EdgeInsets.all(16),
       width: size.width,
       height: 80,
-      color: Colors.blue,
+      color: Colors.blueGrey,
       child: ListTile(
         leading: FlutterLogo(
+          colors: Colors.grey,
           size: 50,
-        ),
-        title: Text(
-          "Carros ${size.width.toInt()}/${size.height.toInt()}",
-          style: TextStyle(fontSize: 20, color: Colors.white),
         ),
         trailing: _direita(),
       ),
@@ -47,12 +44,12 @@ class _HeaderState extends State<Header> {
           ),
           onTap: () {
             // abre o popup menu
-            dynamic state = _estadoMenu.currentState;
+            dynamic state = _menuState.currentState;
             state.showButtonMenu();
           },
         ),
         PopupMenuButton<String>(
-          key: _estadoMenu,
+          key: _menuState,
           padding: EdgeInsets.zero,
           onSelected: (value) {
             _onClickOptionMenu(context, value);

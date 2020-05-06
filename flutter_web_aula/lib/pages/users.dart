@@ -9,7 +9,7 @@ class _UsersPageState extends State<UsersPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("Users2"),
+      child: Text("User"),
     );
   }
 }

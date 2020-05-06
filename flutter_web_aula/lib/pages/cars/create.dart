@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/models/car.dart';
-import 'package:flutter_web_aula/models/custom_navigator.dart';
 import 'package:flutter_web_aula/repositories/car_repository.dart';
 import 'package:flutter_web_aula/utils/alert.dart';
 import 'package:flutter_web_aula/utils/api_response.dart';
+import 'package:flutter_web_aula/widgets/inputs/text_form_field.dart';
 import 'package:flutter_web_aula/widgets/upload.dart';
 import 'package:provider/provider.dart';
 
@@ -31,27 +31,6 @@ class _CarCreateState extends State<CarCreate> {
     return null;
   }
 
-  Widget _textFormField(
-      {String label,
-      String hint,
-      TextEditingController controller,
-      Function(String) validator,
-      bool obscureText = false}) {
-    return TextFormField(
-      controller: controller,
-      validator: validator,
-      keyboardType: TextInputType.text,
-      obscureText: obscureText,
-      style: TextStyle(color: Colors.black),
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-        labelText: label,
-        labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-        hintText: hint,
-      ),
-    );
-  }
-
   _button(String text, {onPressed}) {
     return Container(
       height: 50,
@@ -59,7 +38,7 @@ class _CarCreateState extends State<CarCreate> {
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         onPressed: onPressed,
-        color: Colors.blue,
+        color: Colors.blueGrey,
         child: Text(
           text,
           style: TextStyle(color: Colors.white, fontSize: 18),
@@ -99,16 +78,9 @@ class _CarCreateState extends State<CarCreate> {
         key: this._formKey,
         child: ListView(
           children: <Widget>[
-//            _textFormField(
-//              label: 'Tipo',
-//              hint: 'Clássico, Esportivo ou Luxo',
-//              controller: _typeController,
-//              validator: _requiredValidator
-//            ),
-//            SizedBox(height: 10,),
             DropdownButton<String>(
               value: _type,
-              underline: Container(height: 1, color: Colors.black38,),
+              underline: Container(height: 1, color: Colors.black26),
               onChanged: (String selectedValue) {
                 setState(() {
                   _type = selectedValue;
@@ -122,14 +94,14 @@ class _CarCreateState extends State<CarCreate> {
               }).toList(),
             ),
             SizedBox(height: 20,),
-            _textFormField(
+            CustomTextFormField(
                 label: 'Nome',
                 hint: 'Nome do Carro',
                 controller: _nameController,
                 validator: _requiredValidator
             ),
             SizedBox(height: 20,),
-            _textFormField(
+            CustomTextFormField(
                 label: 'Descrição',
                 hint: 'Descrição do Carro',
                 controller: _descriptionController,

@@ -3,16 +3,16 @@ import 'package:flutter_web_aula/app_model.dart';
 import 'package:flutter_web_aula/models/car.dart';
 import 'package:provider/provider.dart';
 
-class CarDetailPage extends StatefulWidget {
+class CarShowPage extends StatefulWidget {
   final Car car;
 
-  const CarDetailPage(this.car);
+  const CarShowPage(this.car);
 
   @override
-  _CarDetailPageState createState() => _CarDetailPageState();
+  _CarShowPageState createState() => _CarShowPageState();
 }
 
-class _CarDetailPageState extends State<CarDetailPage> {
+class _CarShowPageState extends State<CarShowPage> {
   _handleClick() {
     AppModel app = Provider.of<AppModel>(this.context, listen: false);
     app.pop();

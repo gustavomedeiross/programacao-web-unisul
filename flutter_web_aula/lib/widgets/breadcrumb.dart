@@ -40,10 +40,10 @@ class Breadcrumb extends StatelessWidget {
                   constraints: BoxConstraints.expand(width: 50),
                   child: Icon(
                     index == 0 ? FontAwesomeIcons.home : FontAwesomeIcons.chevronRight,
-                    color: Colors.blue,
+                    color: Colors.blueGrey,
                   ),
                 ),
-                Text(navigator.title, style: TextStyle(fontSize: 20, color: Colors.blue))
+                Text(navigator.title, style: TextStyle(fontSize: 20, color: Colors.blueGrey))
               ]
             ),
           );

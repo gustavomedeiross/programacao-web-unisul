@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_aula/home.dart';
 import 'package:flutter_web_aula/models/user.dart';
 import 'package:flutter_web_aula/nav.dart';
-import 'package:flutter_web_aula/pages/cars/car_list.dart';
+import 'package:flutter_web_aula/pages/cars/index.dart';
 import 'package:flutter_web_aula/repositories/login_repository.dart';
 import 'package:flutter_web_aula/utils/alert.dart';
 import 'package:flutter_web_aula/utils/api_response.dart';
+import 'package:flutter_web_aula/widgets/inputs/text_form_field.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -54,28 +55,11 @@ class _LoginFormState extends State<LoginForm> {
       if (user.isAdmin()) {
         push(context, HomePage(), replace: true);
       } else {
-        push(context, CarPage(), replace: true);
+        push(context, CarIndexPage(), replace: true);
       }
     } else {
       alert(context, response.message, 'Login');
     }
-  }
-
-
-  Widget _textFormField({ String label, String hint, TextEditingController controller, Function(String) validator, bool obscureText = false}) {
-    return TextFormField(
-      controller: controller,
-      validator: validator,
-      keyboardType: TextInputType.text,
-      obscureText: obscureText,
-      style: TextStyle(color: Colors.black),
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-        labelText: label,
-        labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-        hintText: hint,
-      ),
-    );
   }
 
   @override
@@ -84,15 +68,13 @@ class _LoginFormState extends State<LoginForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          _textFormField(label: 'Login', hint: 'Digite o login', controller: _login, validator: _loginValidator),
-          Divider(),
-          _textFormField(label: 'Senha', hint: 'Digite a senha', controller: _password, validator: _passwordValidator, obscureText: true),
-          Divider(),
+          CustomTextFormField(label: 'Login', hint: 'Digite o login', controller: _login, validator: _loginValidator),
+          SizedBox(height: 20,),
+          CustomTextFormField(label: 'Senha', hint: 'Digite a senha', controller: _password, validator: _passwordValidator, obscureText: true),
+          SizedBox(height: 20,),
           Container(
             height: 50,
-            width: 250,
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: FlatButton(
               onPressed: _handleClick,
               color: Color.fromARGB(255, 21, 61, 110),
               child: Text(

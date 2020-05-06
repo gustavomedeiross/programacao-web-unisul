@@ -15,39 +15,30 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-//          Image.asset(
-//            'assets/images/background.jpg',
-//            fit: BoxFit.fill,
-//            width: double.infinity,
-//          ),
+          Image.asset(
+            'assets/images/background.jpg',
+            fit: BoxFit.fill,
+            width: double.infinity,
+          ),
           Center(
             child: Container(
+//              width: MediaQuery.of(context).size.width * 0.3,
+//              height: MediaQuery.of(context).size.height * 0.5,
               width: 460,
-              height: 400,
+              height: 380,
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 242, 244, 245),
-                borderRadius: BorderRadius.circular(12),
+                color: Color.fromARGB(230, 242, 244, 245),
               ),
               child: Column(
                 children: <Widget>[
                   Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 60, 60, 60),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10)
-                      ),
-                    ),
                     height: 76,
                     child: Center(
-                      child: Text(
-                        'Carros',
-                        style: TextStyle(color: Colors.white, fontSize: 22),
-                      ),
+                      child: FlutterLogo(),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.all(25),
                     child: LoginForm(),
                   ),
                 ],
