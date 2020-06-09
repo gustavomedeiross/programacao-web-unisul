@@ -10,4 +10,8 @@ class CityRepository {
     List jsonCities = json.decode(response.body);
     return jsonCities.map<City>((city) => City.fromJson(city)).toList();
   }
+
+  void store(City city) async {
+    await http.post(API_URL + '/cities', body: city.toJson());
+  }
 }

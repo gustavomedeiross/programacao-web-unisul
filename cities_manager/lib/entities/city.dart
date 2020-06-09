@@ -12,4 +12,12 @@ class City {
         uf: json['uf']
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': this.id,
+      'name': this.name,
+      'uf': this.uf
+    };
+  }
 }

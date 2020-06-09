@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:cities_manager/entities/city.dart';
 import 'package:cities_manager/repositories/city_repository.dart';
-import 'package:flutter/material.dart';
+import 'package:cities_manager/pages/create_city.dart';
+
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,7 +21,7 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () => print('hello'),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateCityPage())),
           ),
         ],
       ),
@@ -38,6 +41,7 @@ class _HomePageState extends State<HomePage> {
           }
 
           return Container(
+            padding: EdgeInsets.all(10),
             child: ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext _, int index) {
