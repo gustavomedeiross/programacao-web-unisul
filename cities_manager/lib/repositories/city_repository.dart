@@ -11,7 +11,13 @@ class CityRepository {
     return jsonCities.map<City>((city) => City.fromJson(city)).toList();
   }
 
-  void store(City city) async {
-    await http.post(API_URL + '/cities', body: city.toJson());
+  Future<http.Response> store(City city) async {
+    final body = json.encode(city.toJson());
+
+    final response = await http.post(API_URL + '/cities', body: body, headers: {
+      'Content-Type': 'application/json',
+    });
+
+    return response;
   }
 }

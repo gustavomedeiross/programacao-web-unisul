@@ -3,8 +3,6 @@ import 'package:cities_manager/entities/city.dart';
 import 'package:cities_manager/repositories/city_repository.dart';
 import 'package:cities_manager/pages/create_city.dart';
 
-
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -21,7 +19,8 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateCityPage())),
+            onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => CreateCityPage())).then((value) => setState(() => {})),
           ),
         ],
       ),
@@ -46,10 +45,23 @@ class _HomePageState extends State<HomePage> {
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext _, int index) {
                 return Card(
-                  child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Text(
-                          '${snapshot.data[index].name} - ${snapshot.data[index].uf}')),
+                  child: ListTile(
+                    title: Text(
+                        '${snapshot.data[index].name} - ${snapshot.data[index].uf}'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        IconButton(
+                          onPressed: () => print('edit'),
+                          icon: Icon(Icons.edit),
+                        ),
+                        IconButton(
+                          onPressed: () => print('delete'),
+                          icon: Icon(Icons.delete),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             ),
