@@ -13,11 +13,12 @@ class CityForm extends StatefulWidget {
 
 class _CityFormState extends State<CityForm> {
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController _nameController;
   TextEditingController _ufController;
 
   String _nameValidator(String value) {
-    if (value == null) {
+    if (value.isEmpty) {
       return 'O nome da cidade não pode ser vazio';
     }
 
@@ -25,7 +26,7 @@ class _CityFormState extends State<CityForm> {
   }
 
   String _ufValidator(String value) {
-    if (value == null) {
+    if (value.isEmpty) {
       return 'É necessário uma UF da cidade';
     }
 
