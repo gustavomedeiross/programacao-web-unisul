@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cities_manager/entities/city.dart';
 import 'package:cities_manager/repositories/city_repository.dart';
 import 'package:cities_manager/pages/create_city.dart';
+import 'package:cities_manager/pages/update_city.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,6 +12,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   CityRepository _cityRepository = CityRepository();
 
+  _handleCityDelete(int id) async {
+    await _cityRepository.delete(id);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +25,9 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => CreateCityPage())).then((value) => setState(() => {})),
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => CreateCityPage()))
+                .then((value) => setState(() => {})),
           ),
         ],
       ),
@@ -52,11 +59,15 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         IconButton(
-                          onPressed: () => print('edit'),
+                          onPressed: () => Navigator.of(context)
+                              .push(MaterialPageRoute(
+                                  builder: (context) => UpdateCityPage(city: snapshot.data[index])))
+                              .then((value) => setState(() => {})),
                           icon: Icon(Icons.edit),
                         ),
                         IconButton(
-                          onPressed: () => print('delete'),
+                          onPressed: () =>
+                              _handleCityDelete(snapshot.data[index].id),
                           icon: Icon(Icons.delete),
                         ),
                       ],

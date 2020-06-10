@@ -3,17 +3,20 @@ import 'package:cities_manager/entities/city.dart';
 import 'package:cities_manager/repositories/city_repository.dart';
 import 'package:cities_manager/widgets/city_form.dart';
 
-class CreateCityPage extends StatefulWidget {
+class UpdateCityPage extends StatefulWidget {
+  final City city;
+  UpdateCityPage({ this.city });
+
   @override
-  _CreateCityPageState createState() => _CreateCityPageState();
+  _UpdateCityPageState createState() => _UpdateCityPageState();
 }
 
-class _CreateCityPageState extends State<CreateCityPage> {
+class _UpdateCityPageState extends State<UpdateCityPage> {
   final _cityRepository = CityRepository();
 
   void _handleFormSubmit({ String name, String uf }) async {
     final city = City(name: name, uf: uf);
-    await _cityRepository.store(city);
+    await _cityRepository.update(city, widget.city.id);
     Navigator.of(context).pop();
   }
 
@@ -25,7 +28,7 @@ class _CreateCityPageState extends State<CreateCityPage> {
       ),
       body: Container(
         padding: EdgeInsets.all(20),
-        child: CityForm(handleFormSubmit: _handleFormSubmit),
+        child: CityForm(handleFormSubmit: _handleFormSubmit, city: widget.city),
       ),
     );
   }
