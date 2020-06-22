@@ -20,13 +20,10 @@ public class ImageService {
     }
 
     public Image create(Base64Image base64Image, HttpServletRequest request) throws Exception {
-        System.out.println(base64Image.getBase64());
-        System.out.println(base64Image.toString());
-//        byte[] imageByte = Base64.decodeBase64(base64Image.getBase64());
-//        String url = "static/images/" + base64Image.getFilename();
-//        String directory = request.getServletContext().getRealPath("/") + url;
-//        new FileOutputStream(directory).write(imageByte);
-//        return create(new Image(url, base64Image.getFilename()));
-        return create(new Image("oie", "oie.jpg"));
+        byte[] imageByte = Base64.decodeBase64(base64Image.getBase64());
+        String imagePath = "src/main/resources/static/images/" + base64Image.getFilename();
+        String url = "images/" + base64Image.getFilename();
+        new FileOutputStream(imagePath).write(imageByte);
+        return create(new Image(url, base64Image.getFilename()));
     }
 }

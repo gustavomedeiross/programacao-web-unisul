@@ -5,6 +5,7 @@ target/
 !**/src/test/**
 
 src/main/resources/static/images/*
+!src/main/resources/static/images/.gitkeep
 
 ### STS ###
 .apt_generated
