@@ -1,5 +1,6 @@
 package com.gustavo.cars.controllers;
 
+import com.gustavo.cars.entities.Base64Image;
 import com.gustavo.cars.entities.Car;
 import com.gustavo.cars.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,11 @@ public class ImageController {
     private ImageService imageService;
 
     @PostMapping
-    public ResponseEntity store(@RequestBody Car image, HttpServletRequest request) {
-        return ResponseEntity.ok().body(image);
-//        try {
-//            return ResponseEntity.status(201).body(imageService.create(image, request));
-//        } catch (Exception exception) {
-//            return ResponseEntity.status(500).body("Não foi possível cadastrar a imagem");
-//        }
+    public ResponseEntity store(@RequestBody Base64Image image, HttpServletRequest request) {
+        try {
+            return ResponseEntity.status(201).body(imageService.create(image, request));
+        } catch (Exception exception) {
+            return ResponseEntity.status(500).body("Não foi possível cadastrar a imagem");
+        }
     }
 }
