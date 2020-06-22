@@ -19,7 +19,7 @@ public class ImageService {
         return imageRepository.save(image);
     }
 
-    public Image create(Base64Image base64Image, HttpServletRequest request) throws Exception {
+    public Image create(Base64Image base64Image) throws Exception {
         byte[] imageByte = Base64.decodeBase64(base64Image.getBase64());
         String imagePath = "src/main/resources/static/images/" + base64Image.getFilename();
         String url = "images/" + base64Image.getFilename();
