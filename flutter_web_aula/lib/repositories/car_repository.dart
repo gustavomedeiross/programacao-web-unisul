@@ -7,11 +7,12 @@ import 'dart:convert';
 
 class CarRepository {
   index() async {
-    final String url = 'https://carros-springboot.herokuapp.com/api/v2/carros';
+    // final String url = 'https://carros-springboot.herokuapp.com/api/v2/carros';
+    final String url = 'http://localhost:8080/cars';
 
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${user.token}',
+      // 'Authorization': 'Bearer ${user.token}',
     });
 
     List rawCars = json.decode(response.body);
@@ -22,12 +23,13 @@ class CarRepository {
 
   store(Car car) async {
     try {
-      String url = 'https://carros-springboot.herokuapp.com/api/v2/carros';
+      // String url = 'https://carros-springboot.herokuapp.com/api/v2/carros';
+      final String url = 'http://localhost:8080/cars';
       String body = json.encode(car.toJson());
 
       final response = await http.post(url, body: body, headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${user.token}',
+        // 'Authorization': 'Bearer ${user.token}',
       });
 
       Map decodedResponse = json.decode(response.body);

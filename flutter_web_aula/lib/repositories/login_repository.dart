@@ -10,8 +10,10 @@ class LoginRepository {
 
       Map<String, String> headers = {'Content-Type': 'application/json'};
 
+      // username: admin
+      // password: 123
       String body = json.encode({
-        'username': login,
+        'username': login, 
         'password': password,
       });
 

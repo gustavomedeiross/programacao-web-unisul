@@ -23,11 +23,10 @@ class Car {
   factory Car.fromJson(Map<String, dynamic> json) {
     return Car(
       id: json['id'],
-      name: json['nome'],
-      description: json['descricao'],
-      type: json['tipo'],
-      image: json['urlFoto'],
-      video: json['urlvideo'],
+      name: json['name'],
+      description: json['description'],
+      type: json['type'],
+      image: json['image'],
       latitude: json['latitude'],
       longitude: json['longitude'],
     );
@@ -36,11 +35,10 @@ class Car {
   Map<String, dynamic> toJson() {
     return {
       'id': this.id,
-      'nome': this.name,
-      'descricao': this.description,
-      'tipo': this.type,
-      'urlFoto': this.image,
-      'urlVideo': this.video,
+      'name': this.name,
+      'description': this.description,
+      'type': this.type,
+      'image': this.image,
       'latitude': this.latitude,
       'longitude': this.longitude,
     };
