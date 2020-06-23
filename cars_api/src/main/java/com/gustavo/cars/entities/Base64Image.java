@@ -19,6 +19,14 @@ public class Base64Image {
         return mimeType;
     }
 
+    public String getFilenameWithoutExtension() {
+        return filename.substring(0, filename.lastIndexOf('.'));
+    }
+
+    public String getFileExtension() {
+        return filename.substring(filename.lastIndexOf('.'));
+    }
+
     public String getBase64() {
         return base64;
     }
