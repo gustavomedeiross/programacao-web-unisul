@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("static/images")
+@RequestMapping("images")
 public class ImageController {
     @Autowired
     private ImageService imageService;

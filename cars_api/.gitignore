@@ -4,8 +4,8 @@ target/
 !**/src/main/**
 !**/src/test/**
 
-src/main/resources/static/images/*
-!src/main/resources/static/images/.gitkeep
+tmp/images/*
+!tmp/images/.gitkeep
 
 ### STS ###
 .apt_generated
